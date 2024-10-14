@@ -14,41 +14,86 @@ impl ListNode {
   }
 }
 
+
+
 impl Solution {
-    pub fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut current_node1 = l1;
-        let mut current_node2 = l2;
+  pub fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    let mut current_node1 = l1;
+    let mut current_node2 = l2;
+    let mut carry: i32 = 0;
 
-        let mut result_node = Box::new(ListNode::new(0));
-        let mut current_node = &mut result_node;
+    let mut result_node = Box::new(ListNode { val: 0, next: None });
+    let mut current_node = &mut result_node;
 
-        let mut carry = 0;
+    while (current_node1.is_some() || current_node2.is_some() || carry > 0) {
+      let mut sum = carry;
 
-        while current_node1.is_some() || current_node2.is_some() || carry > 0 {
-            let mut sum = carry;
+      if let Some(node) = current_node1 {
+        sum += node.val;
+        current_node1 = node.next;
+      }
 
-            if let Some(node) = current_node1 {
-                sum += node.val;
-                current_node1 = node.next;
-            }
+      if let Some(node) = current_node2 {
+        sum += node.val;
+        current_node2 = node.next;
+      }
 
-            if let Some(node) = current_node2 {
-                sum += node.val;
-                current_node2 = node.next;
-            }
+      carry = sum / 10;
+      current_node.val = sum % 10;
 
-            current_node.val = sum % 10;
-            carry = sum / 10;
-
-            if (current_node1.is_some() || current_node2.is_some() || carry > 0) {
-                current_node.next = Some(Box::new(ListNode::new(0)));
-                current_node = current_node.next.as_mut().unwrap();
-            }
-        }
-
-        return Some(result_node);
+      if (current_node1.is_some() || current_node2.is_some() || carry > 0) {
+        let mut next_node = Box::new(
+          ListNode {
+            val: 0,
+            next: None
+          });
+        current_node.next = Some(next_node);
+        current_node = current_node.next.as_mut().unwrap();
+      }
     }
+    return Some(result_node);
+  }
 }
+
+
+
+
+// try3
+// impl Solution {
+//     pub fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+//         let mut current_node1 = l1;
+//         let mut current_node2 = l2;
+//
+//         let mut result_node = Box::new(ListNode::new(0));
+//         let mut current_node = &mut result_node;
+//
+//         let mut carry = 0;
+//
+//         while current_node1.is_some() || current_node2.is_some() || carry > 0 {
+//             let mut sum = carry;
+//
+//             if let Some(node) = current_node1 {
+//                 sum += node.val;
+//                 current_node1 = node.next;
+//             }
+//
+//             if let Some(node) = current_node2 {
+//                 sum += node.val;
+//                 current_node2 = node.next;
+//             }
+//
+//             current_node.val = sum % 10;
+//             carry = sum / 10;
+//
+//             if (current_node1.is_some() || current_node2.is_some() || carry > 0) {
+//                 current_node.next = Some(Box::new(ListNode::new(0)));
+//                 current_node = current_node.next.as_mut().unwrap();
+//             }
+//         }
+//
+//         return Some(result_node);
+//     }
+// }
 
 
 
