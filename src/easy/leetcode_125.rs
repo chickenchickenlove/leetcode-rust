@@ -10,6 +10,12 @@ impl Solution {
             .map(|c| c.to_ascii_lowercase())
             .collect();
 
+
+        let map = s
+            .chars()
+            .filter(|c| c.is_alphanumeric())
+            .map(|c| c.to_ascii_lowercase());
+
         if (ss.len() == 0) {
             return true;
         }
