@@ -15,8 +15,7 @@ impl Solution {
         let mut min_value = 0;
         let mut result = 0;
 
-        for i in 0..n {
-            let current = nums[i];
+        for &current in &nums {
             let temp_max = current
                 .max(max_value * current)
                 .max(min_value * current);
@@ -25,9 +24,10 @@ impl Solution {
                 .min(min_value * current)
                 .min(max_value * current);
 
-            result = result.max(temp_max);
             max_value = temp_max;
+            result = result.max(max_value);
         }
+
         result
     }
 }
