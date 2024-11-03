@@ -45,7 +45,7 @@ impl Solution {
                 }
             }
         }
-        result.into_iter()₩
+        result.into_iter()
             .map(|t| t.into_iter().collect()) // 여기서 t.iter()를 하게 되면 참조자이기 때문에 그 값은 필요없음. 그래서 into_iter()를 함.
             .collect()
     }
