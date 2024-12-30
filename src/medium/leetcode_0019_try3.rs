@@ -16,43 +16,37 @@ impl ListNode {
 }
 impl Solution {
     pub fn remove_nth_from_end(head: Option<Box<ListNode>>, n: i32) -> Option<Box<ListNode>> {
-        let mut nums = vec![];
-        let mut mut_head = head;
+        let mut mutable_head = head;
+        let mut ref_head = &mutable_head;
+        let mut vec = vec![];
 
-        while let Some(node) = mut_head {
-            nums.push(node.val);
-            mut_head = node.next;
+        while let Some(node) = ref_head {
+            ref_head = &node.next;
+            vec.push(node.val);
         }
 
-        if nums.len() == 1 as usize {
+        if vec.len() == 1 {
             return None;
         }
 
-        let should_remove_idx = (n - 1) as usize;
+        let target_index = (vec.len() - n as usize);
+        vec.remove(target_index);
+
         let mut result = Some(Box::new(ListNode::new(0)));
+        let mut result_ref: &mut Option<Box<ListNode>> = &mut result;
 
-        for (index, value) in nums.iter().rev().enumerate() {
-            if index == should_remove_idx {
-                continue;
+        for (idx, value) in vec.into_iter().enumerate() {
+            if idx == 0 {
+                result_ref.as_mut().unwrap().val = value;
+            } else {
+                let mut new_node = Some(Box::new(ListNode::new(value)));
+                let now_node = result_ref.as_mut().unwrap();
+
+                now_node.next = new_node;
+                result_ref = &mut now_node.next;
             }
+        }
 
-            if let Some(node) = &mut result {
-                node.val = value.clone();
-            }
-
-            if (index != nums.len() - 1) {
-                if (index + 1 == nums.len() - 1) && (index + 1 == should_remove_idx) {
-                    continue;
-                }
-
-                let mut next_node = Some(Box::new(ListNode::new(0)));
-                if let Some(node) = &mut next_node {
-                    node.next = result;
-                }
-                result = next_node;
-            }
-
-        };
         result
     }
 }
