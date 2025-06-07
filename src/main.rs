@@ -1,15 +1,49 @@
 use std::io::stdout;
 // use crate::easy::leetcode_1::Solution;
 // use crate::easy::leetcode_2::{ListNode, Solution};
-use crate::easy::leetcode_9::Solution;
+// use crate::easy::leetcode_9::Solution;
 
 mod easy;
+mod medium;
+
+
+use crate::medium::leetcode_0019_try2::{ListNode, Solution};
 
 
 fn main() {
-    let palindrome = Solution::is_palindrome(121);
+    let mut a = Box::new(ListNode::new(1));
+    let mut b = Box::new(ListNode::new(2));
+    a.next = Some(b);
+
+    Solution::remove_nth_from_end(Some(a), 1);
+
+    // medium::leetcode_15::Solution::three_sum(vec![-1, 0, 1, 2, -1, -4]);
+    // let r = medium::leetcode_16::Solution::three_sum_closest(vec![-1, 2, 1, -4], 1);
+    //
+    // let a = "hello";
+    // let b = a.chars();
+    // // let c = a[1];
+
+    // let r = medium::leetcode_72::Solution::min_distance(String::from(""), String::from(""));
+    // println!("{}", r);
 
 
+    // let r = medium::leetcode_62::Solution::unique_paths(3, 2);
+    // println!("{}", r);
+
+    // let k = String::from("Hello");
+    // let chars: Vec<char> = k.as_str().chars().collect();
+    // let k1 = &chars;
+    // let k2 = &k1[0..k1.len()-1];
+    // let k3: &Vec<char> = &k1[0..k1.len() - 1].iter().copied().collect();
+    // let k4 = ['h', 'e', 'l', 'l', 'o'];
+    // let k5: Vec<char> = k4.iter().collect();
+    //
+    // println!("123", );
+
+
+    // let a = easy::leetcode_125::Solution::is_palindrome(String::from(" "));
+    // println!("{}", a);
 
 }
 
