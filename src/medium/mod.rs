@@ -24,3 +24,4 @@ mod leetcode_0120_try2;
 mod leetcode_2466;
 mod leetcode_0005;
 mod leetcode_0740;
+mod leetcode_0002_try5;
