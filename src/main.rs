@@ -5,19 +5,15 @@ use std::io::stdout;
 
 mod easy;
 mod medium;
-
+mod backjoon;
 
 use crate::medium::leetcode_0019_try2::{ListNode, Solution};
 
 
 fn main() {
-    let mut a = Box::new(ListNode::new(1));
-    let mut b = Box::new(ListNode::new(2));
-    a.next = Some(b);
+    backjoon::problem_10828::main();
 
-    Solution::remove_nth_from_end(Some(a), 1);
-
-    // medium::leetcode_15::Solution::three_sum(vec![-1, 0, 1, 2, -1, -4]);
+        // medium::leetcode_15::Solution::three_sum(vec![-1, 0, 1, 2, -1, -4]);
     // let r = medium::leetcode_16::Solution::three_sum_closest(vec![-1, 2, 1, -4], 1);
     //
     // let a = "hello";
